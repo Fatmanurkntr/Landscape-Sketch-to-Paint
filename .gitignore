@@ -1,0 +1,24 @@
+# Sanal Ortam
+venv/
+.env
+
+# Editör Ayarları (Gereksiz)
+.vscode/
+
+# Python önbellekleri
+__pycache__/
+*.pyc
+*.pyo
+
+# Büyük Model Dosyaları (ÇOK ÖNEMLİ - GitHub'a gitmemeli!)
+*.h5
+*.keras
+*.pth
+models/*.h5
+models/*.keras
+models/best_generator.weights.h5
+models/best_landscape_unet.keras
+
+# Veri ve Çıktı Klasörleri
+data/
+examples/.ipynb_checkpoints
