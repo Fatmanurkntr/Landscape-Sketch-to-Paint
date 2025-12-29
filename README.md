@@ -1,10 +1,15 @@
 # 🎨 Landscape Sketch to Paint: U-Net ve Pix2Pix GAN ile Görüntü Sentezi
 
 **Ders:** Derin Öğrenme (Deep Learning) Dönem Projesi
+
+
 **Konu:** Image-to-Image Translation (Görüntüden Görüntüye Çeviri)
+
+
 **Model Yaklaşımı:** Aşamalı Geliştirme (Baseline U-Net -> Final Pix2Pix GAN)
 
 🔗 **Canlı Demo Uygulaması:** [Streamlit Üzerinde Görüntüle](https://landscape-sketch-to-paint-8jikjxxn4lxsqcxfcebwpr.streamlit.app/)
+
 🔗 **Veri Seti:** [Kaggle - Landscape Pictures](https://www.kaggle.com/datasets/arnaud58/landscape-pictures)
 
 ---
@@ -155,5 +160,6 @@ streamlit run app.py
 2.Ronneberger, O., Fischer, P., & Brox, T. (2015). U-net: Convolutional networks for biomedical image segmentation. International Conference on Medical Image Computing and Computer-Assisted Intervention.
 
 3.Goodfellow, I., et al. (2014). Generative adversarial nets. Advances in neural information processing systems.
+
 
 
