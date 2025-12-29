@@ -12,7 +12,7 @@
 
 🔗 **Veri Seti:** [Kaggle \- Landscape Pictures](https://www.kaggle.com/datasets/arnaud58/landscape-pictures)
 
-## **1\. Proje Konusu ve Seçilme Gerekçesi **
+## 1. Proje Konusu ve Seçilme Gerekçesi 
 
 ### **Problem Tanımı**
 
@@ -24,11 +24,11 @@ Dijital sanat üretimi, oyun geliştirme (prosedürel içerik üretimi) ve mimar
 
 Bu proje, **Generative Adversarial Networks (GAN)** yapılarının bu bulanıklık sorununu nasıl çözdüğünü göstermek ve literatürde devrim yaratan **Pix2Pix** (Isola et al., 2017\) mimarisinin uçtan uca bir uygulamasını gerçekleştirmek amacıyla seçilmiştir.
 
-## **2\. Veri Seti ve Ön İşleme Süreçleri **
+## 2. Veri Seti ve Ön İşleme Süreçleri 
 
 Projede Kaggle platformunda bulunan **Landscape Pictures** veri seti kullanılmıştır. Ancak veri seti doğrudan kullanılmamış, **dinamik bir ön işleme hattından (preprocessing pipeline)** geçirilmiştir.
 
-### **2.1. Dinamik Veri Üretimi (Runtime Sketch Generation)**
+### 2.1. Dinamik Veri Üretimi (Runtime Sketch Generation)
 
 Projede hazır "sketch" verileri yerine, renkli fotoğraflardan çalışma zamanında taslak üreten bir yapı kurulmuştur. Bu işlem için **OpenCV Canny Edge Detection** algoritması kullanılmıştır.
 
@@ -38,7 +38,7 @@ Projede hazır "sketch" verileri yerine, renkli fotoğraflardan çalışma zaman
 gray \= cv2.cvtColor(img, cv2.COLOR\_RGB2GRAY)  
 edges \= cv2.Canny(gray, 100, 200\) \# Girdi (Input) çalışma anında üretilir
 
-### **2.2. Teknik Kısıtlamalar ve Optimizasyon**
+### 2.2. Teknik Kısıtlamalar ve Optimizasyon
 
 Eğitim süreci Kaggle Kernel ortamında (Tesla T4 GPU \- 16GB VRAM) gerçekleştirilmiştir. GAN eğitimi, aynı anda iki modelin (Generator \+ Discriminator) ağırlıklarını ve gradyanlarını bellekte tuttuğu için standart CNN'lere göre 2 kat daha fazla VRAM gerektirir. ResourceExhaustedError sorununu aşmak için şu optimizasyonlar uygulanmıştır:
 
@@ -47,11 +47,11 @@ Eğitim süreci Kaggle Kernel ortamında (Tesla T4 GPU \- 16GB VRAM) gerçekleş
 3. **Normalizasyon:** Görüntü pikselleri, Generator çıkışındaki Sigmoid aktivasyonuna uygun olarak $\[0, 1\]$ aralığına normalize edilmiştir (img / 255.0).  
 4. **Veri Ayrımı:** Veri seti karıştırılarak (shuffle) %90 Eğitim, %10 Doğrulama olarak ayrılmıştır.
 
-## **3\. Yöntem Seçimi ve Karşılaştırmalı Analiz (15 Puan)**
+## 3. Yöntem Seçimi ve Karşılaştırmalı Analiz 
 
 Proje kapsamında problem çözümüne aşamalı bir yaklaşım izlenmiş ve iki farklı deney gerçekleştirilmiştir.
 
-### **3.1. Deneysel Süreç 1: Baseline Model (Sadece U-Net)**
+### 3.1. Deneysel Süreç 1: Baseline Model (Sadece U-Net)
 
 * **İlgili Dosya:** notebooks/Training\_UNet.ipynb
 
@@ -62,7 +62,7 @@ Proje kapsamında problem çözümüne aşamalı bir yaklaşım izlenmiş ve iki
 * **Sonuç Analizi:** Model nesnelerin yerini doğru öğrense de, dokular (çimen, kaya yüzeyi) pürüzsüz ve bulanık (blurry) çıkmıştır.  
 * **Nedeni:** L1 kaybı, belirsizlik durumunda olası tüm renklerin "ortalamasını" almayı tercih eder.
 
-### **3.2. Deneysel Süreç 2: Final Model (Pix2Pix GAN)**
+### 3.2. Deneysel Süreç 2: Final Model (Pix2Pix GAN)
 
 * **İlgili Dosya:** notebooks/Training\_Pix2Pix\_GAN.ipynb
 
@@ -72,7 +72,7 @@ Bulanıklık sorununu çözmek için sisteme Adversarial Learning (Çekişmeli �
 * **Discriminator (Eleştirmen):** Görüntünün tamamına tek puan vermek yerine, resmi $30 \\times 30$ boyutunda yamalara bölen **PatchGAN** kullanılmıştır. Bu, modelin yüksek frekanslı detayları (keskinliği) öğrenmesini zorunlu kılar.  
 * **Sonuç Analizi:** Sonuçlar çok daha keskin, detaylı ve gerçekçidir.
 
-## **4\. Model Eğitimi ve Mimari Detaylar **
+## 4. Model Eğitimi ve Mimari Detaylar 
 
 Aşağıdaki tablo, iki aşama arasındaki teknik farkları özetlemektedir:
 
@@ -87,7 +87,7 @@ Aşağıdaki tablo, iki aşama arasındaki teknik farkları özetlemektedir:
 | **Aktivasyon (Çıkış)** | Sigmoid | Sigmoid |
 | **Özel Teknikler** | ReduceLROnPlateau | Custom Training Loop, GANMonitor |
 
-### **4.1. Generator Mimarisi (Ortak)**
+### 4.1. Generator Mimarisi (Ortak)
 
 Her iki deneyde de Generator olarak **U-Net** kullanılmıştır.
 
@@ -95,20 +95,20 @@ Her iki deneyde de Generator olarak **U-Net** kullanılmıştır.
 * **Decoder:** Görüntüyü tekrar genişletir.  
 * **Skip Connections:** Encoder'daki kenar bilgilerini doğrudan Decoder'a taşıyarak taslağın şeklinin korunmasını sağlar.
 
-### **4.2. Discriminator Mimarisi (PatchGAN)**
+### 4.2. Discriminator Mimarisi (PatchGAN)
 
 Sadece GAN aşamasında kullanılmıştır. Görüntüyü $30 \\times 30$ boyutunda yamalara böler ve her yama için "Gerçek" veya "Sahte" kararı verir.
 
-### **4.3. Kayıp Fonksiyonları**
+### 4.3. Kayıp Fonksiyonları
 
 $$ Total Loss \= Loss\_{GAN} \+ (\\lambda \\times Loss\_{L1}) $$
 
 * **Adversarial Loss:** Discriminator'ı kandırma başarısı (Gerçekçilik).  
 * **L1 Loss:** Piksel bazlı benzerlik (Renk Doğruluğu). $\\lambda \= 100$ katsayısı ile ağırlıklandırılmıştır.
 
-## **5\. Sonuçların Değerlendirilmesi**
+## 5. Sonuçların Değerlendirilmesi
 
-### **5.1. Sayısal Analiz (Metrics)**
+### 5.1. Sayısal Analiz (Metrics)
 
 Modelin başarısı test seti üzerinde SSIM ve PSNR metrikleri ile ölçülmüştür:
 
@@ -117,28 +117,31 @@ Modelin başarısı test seti üzerinde SSIM ve PSNR metrikleri ile ölçülmü�
 
 **Yorum:** Bu değerlerin "mükemmel" (SSIM \> 0.8) sınırının altında kalmasının temel nedeni **Mevsimsel Belirsizliktir (Multimodality)**. Siyah-beyaz bir ağaç çizimi, "Sonbahar (Turuncu)" veya "İlkbahar (Yeşil)" olarak yorumlanabilir. Model görsel olarak başarılı olsa bile, orijinal fotoğraftan farklı bir mevsim/renk seçtiğinde piksel tabanlı metrikler matematiksel olarak düşük çıkmaktadır.
 
-### **5.2. Görsel Analiz (Visual Inspection)**
+### 5.2. Görsel Analiz (Visual Inspection)
 
 * **U-Net Sonuçları:** Yapısal olarak doğru ancak "sulu boya" etkisi yaratan bulanık sonuçlar.  
 * **GAN Sonuçları:** Nehir yansımaları, bulut dokuları ve dağ yüzeylerinde belirgin keskinlik artışı. Ayrıca Eğitim sırasında GANMonitor callback'i ile her epoch sonunda üretilen görsellerdeki gelişim net bir şekilde gözlemlenmiştir.
 
-## **6\. Proje Dokümantasyonu ve Dosya Yapısı (10 Puan)**
+## 6. Proje Dokümantasyonu ve Dosya Yapısı 
 
-Proje dosyaları, yeniden üretilebilirlik (reproducibility) ilkesine uygun olarak organize edilmiştir.
+Proje dosyaları, yeniden üretilebilirlik (reproducibility) ilkesine uygun olarak, kodun modülerliğini ve okunabilirliğini artıracak şekilde organize edilmiştir. Aşağıda dizin yapısı ve dosyaların işlevleri detaylandırılmıştır:
 
-Landscape-Sketch-to-Paint/  
-├── app.py                     \# Streamlit web arayüzü ana dosyası  
-├── requirements.txt           \# Gerekli kütüphaneler  
-├── style\_utils.py             \# Arayüz için CSS ve tasarım kodları  
-├── src/                       \# Kaynak Kodlar  
-│   ├── model.py               \# U-Net ve GAN mimari tanımları  
-│   └── \_\_init\_\_.py  
-├── notebooks/                 \# Eğitim ve Kanıt Dosyaları  
-│   ├── Training\_UNet.ipynb        \# 1\. Aşama: Baseline U-Net Denemeleri  
-│   └── Training\_Pix2Pix\_GAN.ipynb \# 2\. Aşama: Final Pix2Pix Eğitimi  
-├── examples/                  \# Test için örnek taslak görselleri  
-└── models/                    \# (Otomatik iner) Eğitilmiş ağırlık dosyaları
+```text
+Landscape-Sketch-to-Paint/
+├── app.py                     # Streamlit web arayüzü ana çalıştırma dosyası
+├── requirements.txt           # Proje için gerekli Python kütüphaneleri ve sürümleri
+├── style_utils.py             # Arayüz için özel CSS ve HTML tasarım kodları
+├── src/                       # Kaynak Kodlar (Modüler Mimari)
+│   ├── model.py               # U-Net ve GAN (Generator/Discriminator) mimari tanımları
+│   └── __init__.py            # Klasörün Python paketi olarak tanınmasını sağlar
+├── notebooks/                 # Model Eğitim Süreçleri (Kanıt Dosyaları)
+│   ├── Training_UNet.ipynb        # 1. Aşama: Baseline U-Net deneyleri ve sonuçları
+│   └── Training_Pix2Pix_GAN.ipynb # 2. Aşama: Final Pix2Pix GAN modelinin eğitimi
+├── examples/                  # Test ve demo için kullanılan örnek taslak görselleri
+├── models/                    # (Otomatik oluşturulur) Eğitilmiş ağırlık dosyalarının indiği klasör
+└── README.md                  # Proje teknik raporu ve kurulum kılavuzu
 
+```
 ## 7. Kurulum ve Çalıştırma
 
 Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
