@@ -12,7 +12,7 @@
 
 🔗 **Veri Seti:** [Kaggle \- Landscape Pictures](https://www.kaggle.com/datasets/arnaud58/landscape-pictures)
 
-## **1\. Proje Konusu ve Seçilme Gerekçesi (15 Puan)**
+## **1\. Proje Konusu ve Seçilme Gerekçesi **
 
 ### **Problem Tanımı**
 
@@ -24,7 +24,7 @@ Dijital sanat üretimi, oyun geliştirme (prosedürel içerik üretimi) ve mimar
 
 Bu proje, **Generative Adversarial Networks (GAN)** yapılarının bu bulanıklık sorununu nasıl çözdüğünü göstermek ve literatürde devrim yaratan **Pix2Pix** (Isola et al., 2017\) mimarisinin uçtan uca bir uygulamasını gerçekleştirmek amacıyla seçilmiştir.
 
-## **2\. Veri Seti ve Ön İşleme Süreçleri (15 Puan)**
+## **2\. Veri Seti ve Ön İşleme Süreçleri **
 
 Projede Kaggle platformunda bulunan **Landscape Pictures** veri seti kullanılmıştır. Ancak veri seti doğrudan kullanılmamış, **dinamik bir ön işleme hattından (preprocessing pipeline)** geçirilmiştir.
 
@@ -72,7 +72,7 @@ Bulanıklık sorununu çözmek için sisteme Adversarial Learning (Çekişmeli �
 * **Discriminator (Eleştirmen):** Görüntünün tamamına tek puan vermek yerine, resmi $30 \\times 30$ boyutunda yamalara bölen **PatchGAN** kullanılmıştır. Bu, modelin yüksek frekanslı detayları (keskinliği) öğrenmesini zorunlu kılar.  
 * **Sonuç Analizi:** Sonuçlar çok daha keskin, detaylı ve gerçekçidir.
 
-## **4\. Model Eğitimi ve Mimari Detaylar (20 Puan)**
+## **4\. Model Eğitimi ve Mimari Detaylar **
 
 Aşağıdaki tablo, iki aşama arasındaki teknik farkları özetlemektedir:
 
@@ -139,22 +139,28 @@ Landscape-Sketch-to-Paint/
 ├── examples/                  \# Test için örnek taslak görselleri  
 └── models/                    \# (Otomatik iner) Eğitilmiş ağırlık dosyaları
 
-## **7\. Kurulum ve Çalıştırma**
+## 7. Kurulum ve Çalıştırma
 
 Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
-1. **Depoyu klonlayın:**  
-   git clone \[https://github.com/Fatmanurkntr/Landscape-Sketch-to-Paint.git\](https://github.com/Fatmanurkntr/Landscape-Sketch-to-Paint.git)  
-   cd Landscape-Sketch-to-Paint
+1.  **Depoyu klonlayın:**
+    ```bash
+    git clone https://github.com/Fatmanurkntr/Landscape-Sketch-to-Paint.git
+    cd Landscape-Sketch-to-Paint
+    ```
 
-2. **Gerekli kütüphaneleri yükleyin:**  
-   pip install \-r requirements.txt
+2.  **Gerekli kütüphaneleri yükleyin:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-3. **Uygulamayı başlatın:**  
-   streamlit run app.py
+3.  **Uygulamayı başlatın:**
+    ```bash
+    streamlit run app.py
+    ```
+    *(Not: Uygulama ilk açılışta Google Drive entegrasyonu sayesinde eğitilmiş model dosyalarını otomatik olarak indirecektir. Bu işlem internet hızınıza bağlı olarak birkaç dakika sürebilir.)*
 
-*(Not: Uygulama ilk açılışta Google Drive entegrasyonu sayesinde eğitilmiş model dosyalarını otomatik olarak indirecektir. Bu işlem internet hızınıza bağlı olarak birkaç dakika sürebilir.)*
-
+    
 ## **8\. Referanslar**
 
 1. Isola, P., Zhu, J. Y., Zhou, T., & Efros, A. A. (2017). Image-to-image translation with conditional adversarial networks. *Proceedings of the IEEE conference on computer vision and pattern recognition*.  
