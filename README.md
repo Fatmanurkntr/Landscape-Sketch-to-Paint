@@ -12,6 +12,10 @@
 
 🔗 **Veri Seti:** [Kaggle \- Landscape Pictures](https://www.kaggle.com/datasets/arnaud58/landscape-pictures)
 
+
+<img width="1635" height="929" alt="Ekran görüntüsü 2025-12-30 015604" src="https://github.com/user-attachments/assets/656cf571-01f4-4fe8-accc-230ceeed0a1f" />
+
+
 ## 1. Proje Konusu ve Seçilme Gerekçesi 
 
 ### **Problem Tanımı**
