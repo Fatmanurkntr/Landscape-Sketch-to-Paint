@@ -12,6 +12,12 @@
 
 🔗 **Veri Seti:** [Kaggle \- Landscape Pictures](https://www.kaggle.com/datasets/arnaud58/landscape-pictures)
 
+## 📄 Proje Raporu
+
+Projenin teknik detaylarını, model mimarisini ve deneysel sonuçlarını içeren
+detaylı raporu incelemek için aşağıdaki bağlantıya tıklayabilirsiniz:
+
+[👉 Proje Raporunu Görüntüle (PDF)](Rapor.pdf)
 
 <img width="1635" height="929" alt="Ekran görüntüsü 2025-12-30 015604" src="https://github.com/user-attachments/assets/656cf571-01f4-4fe8-accc-230ceeed0a1f" />
 
